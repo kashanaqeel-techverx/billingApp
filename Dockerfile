@@ -1,14 +1,12 @@
 FROM python:3.10-slim
 
-ENV GOOGLE_APPLICATION_CREDENTIALS="/app/service-account.json"
-ENV GOOGLE_CLOUD_PROJECT="your-gcp-project-id"
-ENV GOOGLE_CLOUD_REGION="your-region""
+ENV GOOGLE_CLOUD_PROJECT="sacred-portal-452319-e2"
+ENV GOOGLE_CLOUD_REGION="us-central1"
 WORKDIR /app
 
 COPY app.py /app/app.py
 COPY setup.sh /app/setup.sh
 COPY requirements.txt /app/requirements.txt
-COPY service-account.json /app/service-account.json # Placeholder for the service account file
 
 RUN apt-get update && \
     apt-get install -y curl bash && \
