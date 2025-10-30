@@ -1,21 +1,23 @@
 steps:
-  # Build the Docker image
+  # Step 1: Build container image
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-t', '${REGISTRY_URL}/billing-app/my-streamlit-app:$COMMIT_SHA',
+      '-t', 'gcr.io/$PROJECT_ID/my-streamlit-app',
       '.'
     ]
 
-  # Push the Docker image to Google Artifact Registry
+  # Step 2: Push image to Google Container/Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      '${REGISTRY_URL}/billing-app/my-streamlit-app:$COMMIT_SHA'
+      'gcr.io/$PROJECT_ID/my-streamlit-app'
     ]
 
+# Register the built image in the build output
 images:
   - 'gcr.io/$PROJECT_ID/my-streamlit-app'
-    
+
+# Cloud Logging only (no Cloud Monitoring)
 options:
   logging: CLOUD_LOGGING_ONLY
