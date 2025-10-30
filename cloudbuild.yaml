@@ -14,17 +14,6 @@ steps:
       'gcr.io/$PROJECT_ID/my-streamlit-app'
     ]
 
-  # Step 3: Deploy to Cloud Run (public URL)
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-      'run', 'deploy', 'my-streamlit-app',
-      '--image', 'gcr.io/$PROJECT_ID/my-streamlit-app',
-      '--region', 'us-central1',
-      '--platform', 'managed',
-      '--allow-unauthenticated',
-      '--service-account=streamlit-exec@$PROJECT_ID.iam.gserviceaccount.com'
-    ]
-
 # The image built by this pipeline
 images:
   - 'gcr.io/$PROJECT_ID/my-streamlit-app'
